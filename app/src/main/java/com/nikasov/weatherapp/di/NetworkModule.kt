@@ -1,6 +1,7 @@
 package com.nikasov.weatherapp.di
 
 import com.nikasov.weatherapp.common.Constants
+import com.nikasov.weatherapp.data.remote.service.WeatherApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -8,6 +9,7 @@ import dagger.hilt.android.components.ApplicationComponent
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
@@ -19,12 +21,17 @@ object NetworkModule {
     @Singleton
     fun provideRetrofit() : Retrofit{
 
-        val token = ""
-
         val requestInterceptor = Interceptor { chain ->
+            val url = chain.request()
+                .url()
+                .newBuilder()
+                .addQueryParameter("appid", Constants.WEATHER_API_KEY)
+                .addQueryParameter("units", Constants.METRIC_TYPE)
+                .build()
+
             val request = chain.request()
                 .newBuilder()
-                .header("Bearer", token)
+                .url(url)
                 .build()
 
             return@Interceptor chain.proceed(request)
@@ -36,9 +43,16 @@ object NetworkModule {
 
         return Retrofit.Builder()
             .client(okHttpClient)
-            .baseUrl(Constants.GOOGLE_PHOTO_URL)
+            .baseUrl(Constants.WEATHER_API_URL)
             .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideWeatherApi(retrofit: Retrofit) : WeatherApi{
+        return retrofit.create(WeatherApi::class.java)
     }
 
 }
