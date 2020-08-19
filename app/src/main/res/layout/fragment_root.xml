@@ -41,75 +41,101 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:onClick="@{() -> viewModel.onSearchClick(city.getText().toString())}"
+            android:onClick="@{() -> viewModel.onSearchClick(weatherBlock, city.getText().toString())}"
             android:text="@string/search"
             android:textAllCaps="false"
             app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
             app:layout_constraintStart_toStartOf="@+id/textInputLayout"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
-        <TextView
-            android:id="@+id/cityName"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/weatherBlock"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="@{viewModel.cityName}"
-            android:textColor="@color/colorPrimary"
-            android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="@+id/textInputLayout"
-            app:layout_constraintTop_toBottomOf="@+id/search"
-            tools:text="City" />
-
-        <TextView
-            android:id="@+id/weatherType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="@{viewModel.weatherType}"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@+id/textInputLayout"
-            app:layout_constraintTop_toBottomOf="@+id/cityName"
-            tools:text="Weather" />
-
-        <TextView
-            android:id="@+id/weatherDescription"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{viewModel.weatherDescription}"
-            android:textColor="@color/grey"
-            android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="@+id/textInputLayout"
-            app:layout_constraintTop_toBottomOf="@+id/weatherType"
-            tools:text="Description" />
-
-        <TextView
-            android:textStyle="bold"
-            android:id="@+id/temperature"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{viewModel.temperature}"
-            android:textColor="@color/colorPrimary"
-            android:textSize="32sp"
-            app:layout_constraintBottom_toTopOf="@+id/avgTemp"
             app:layout_constraintEnd_toEndOf="@+id/search"
-            app:layout_constraintTop_toTopOf="@+id/cityName"
-            tools:text="20 °C" />
+            app:layout_constraintStart_toStartOf="@+id/textInputLayout"
+            app:layout_constraintTop_toBottomOf="@+id/search">
 
-        <TextView
-            android:textStyle="italic"
-            android:id="@+id/avgTemp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{viewModel.avgTemperature}"
-            android:textColor="@color/black"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@+id/weatherDescription"
-            app:layout_constraintEnd_toEndOf="@+id/temperature"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@+id/temperature"
-            app:layout_constraintTop_toBottomOf="@+id/temperature"
-            tools:text="20°C/25°C" />
+            <TextView
+                android:id="@+id/cityName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.cityName}"
+                android:textColor="@color/colorPrimary"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="City" />
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.date}"
+                android:textColor="@color/grey"
+                android:textSize="14sp"
+                android:textStyle="italic"
+                app:layout_constraintStart_toStartOf="@+id/cityName"
+                app:layout_constraintTop_toBottomOf="@+id/cityName"
+                tools:text="12 April 1996" />
+
+            <TextView
+                android:id="@+id/weatherType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="@{viewModel.weatherType}"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/date"
+                tools:text="Weather" />
+
+            <TextView
+                android:id="@+id/weatherDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.weatherDescription}"
+                android:textColor="@color/grey"
+                android:textSize="14sp"
+                android:textStyle="italic"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/weatherType"
+                tools:text="Description" />
+
+            <TextView
+                android:id="@+id/temperature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.temperature}"
+                android:textColor="@color/colorPrimary"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/avgTemp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/cityName"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:text="20 °C" />
+
+            <TextView
+                android:id="@+id/avgTemp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="@{viewModel.avgTemperature}"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="italic"
+                app:layout_constraintBottom_toBottomOf="@+id/weatherDescription"
+                app:layout_constraintEnd_toEndOf="@+id/temperature"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@+id/temperature"
+                app:layout_constraintTop_toBottomOf="@+id/temperature"
+                tools:text="20°C/25°C" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
