@@ -3,6 +3,7 @@
     <string name="city">City</string>
     <string name="search">Search</string>
     <string name="celsius">°C</string>
-    <string name="day_format">EEEE d MMMM yyyy</string>
+    <string name="day_format">EEEE d, HH:MM</string>
+    <string name="c">°C</string>
 
 </resources>

@@ -12,4 +12,10 @@ interface WeatherApi {
         @Query("q") location : String
     ) : Flowable<WeatherResult>
 
+    @GET("weather")
+    fun getWeatherByCoordinates(
+        @Query("lat") lat : String,
+        @Query("lon") lon : String
+    ) : Flowable<WeatherResult>
+
 }

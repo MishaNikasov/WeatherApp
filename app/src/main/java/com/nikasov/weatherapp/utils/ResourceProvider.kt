@@ -6,6 +6,7 @@ import android.view.animation.AnimationUtils
 import javax.inject.Inject
 
 class ResourceProvider @Inject constructor (var context : Context) {
+
     fun getString(resId : Int) : String{
         return context.resources.getString(resId)
     }

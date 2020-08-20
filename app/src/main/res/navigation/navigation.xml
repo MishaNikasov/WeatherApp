@@ -9,5 +9,13 @@
     <fragment
         android:id="@+id/rootFragment"
         android:name="com.nikasov.weatherapp.ui.fragment.root.RootFragment"
-        android:label="RootFragment" />
+        android:label="RootFragment" >
+        <action
+            android:id="@+id/toAddFragment"
+            app:destination="@id/addFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addFragment"
+        android:name="com.nikasov.weatherapp.ui.fragment.add.AddFragment"
+        android:label="AddFragment" />
 </navigation>
