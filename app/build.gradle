@@ -101,5 +101,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-location:17.0.0'
     //permissions
     implementation 'pub.devrel:easypermissions:3.0.0'
+    //swiperefreshlayout
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
 }

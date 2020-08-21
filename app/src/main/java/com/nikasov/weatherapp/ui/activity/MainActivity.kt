@@ -6,6 +6,7 @@ import androidx.activity.viewModels
 import androidx.navigation.findNavController
 import com.nikasov.weatherapp.R
 import dagger.hilt.android.AndroidEntryPoint
+import pub.devrel.easypermissions.EasyPermissions
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {

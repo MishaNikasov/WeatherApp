@@ -9,14 +9,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.location.LocationServices
-import com.google.android.material.transition.MaterialElevationScale
-import com.google.android.material.transition.MaterialFadeThrough
 import com.nikasov.weatherapp.R
 import com.nikasov.weatherapp.databinding.FragmentRootBinding
-import com.nikasov.weatherapp.utils.AnimationUtil
 import com.nikasov.weatherapp.utils.ModelConverter
 import com.nikasov.weatherapp.utils.PermissionsUtil
 import com.nikasov.weatherapp.utils.TransitionUtils
@@ -24,10 +20,10 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_root.*
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
-import timber.log.Timber
 
 @AndroidEntryPoint
-class RootFragment: Fragment(), EasyPermissions.PermissionCallbacks {
+class RootFragment: Fragment(),
+    EasyPermissions.PermissionCallbacks{
 
     private val viewModel: RootViewModel by viewModels()
     private lateinit var binding: FragmentRootBinding
@@ -59,8 +55,16 @@ class RootFragment: Fragment(), EasyPermissions.PermissionCallbacks {
 //            cityName.animation = AnimationUtil.fading(cityName)
         })
 
+        viewModel.isLoading.observe(viewLifecycleOwner, Observer { isLoading ->
+            loading.isRefreshing = isLoading
+        })
+
         menuBtn.setOnClickListener {
             findNavController().navigate(R.id.toListFragment)
+        }
+
+        loading.setOnRefreshListener {
+            getLocation()
         }
     }
 
@@ -81,7 +85,7 @@ class RootFragment: Fragment(), EasyPermissions.PermissionCallbacks {
                     }
                 }
         } else {
-            PermissionsUtil.requestLocationPermission(requireActivity())
+            PermissionsUtil.requestLocationPermission(this)
         }
     }
 
@@ -89,7 +93,7 @@ class RootFragment: Fragment(), EasyPermissions.PermissionCallbacks {
         if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
             AppSettingsDialog.Builder(this).build().show()
         } else {
-            PermissionsUtil.requestLocationPermission(requireActivity())
+            PermissionsUtil.requestLocationPermission(this)
         }
     }
 
@@ -103,7 +107,6 @@ class RootFragment: Fragment(), EasyPermissions.PermissionCallbacks {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
     }
-
 }

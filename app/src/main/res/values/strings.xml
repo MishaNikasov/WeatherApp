@@ -1,12 +1,11 @@
 <resources>
-    <string name="app_name">WeatherApp</string>
+    <string name="app_name">Weather</string>
     <string name="city">City</string>
     <string name="search">Search</string>
     <string name="celsius">°C</string>
-    <string name="day_format">EEEE d</string>
+    <string name="day_format">EEEE, d</string>
     <string name="c">°C</string>
     <string name="c_small">°c</string>
     <string name="wind_speed">км/ч</string>
     <string name="pressure">mb</string>
-
 </resources>
