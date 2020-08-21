@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.location.LocationServices
@@ -15,6 +16,7 @@ import com.google.android.material.transition.MaterialElevationScale
 import com.google.android.material.transition.MaterialFadeThrough
 import com.nikasov.weatherapp.R
 import com.nikasov.weatherapp.databinding.FragmentRootBinding
+import com.nikasov.weatherapp.utils.AnimationUtil
 import com.nikasov.weatherapp.utils.PermissionsUtil
 import com.nikasov.weatherapp.utils.TransitionUtils
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,12 +31,6 @@ class RootFragment: Fragment(), EasyPermissions.PermissionCallbacks {
     private val viewModel: RootViewModel by viewModels()
     private lateinit var binding: FragmentRootBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        exitTransition = TransitionUtils.getContainerTransform(true)
-        reenterTransition = TransitionUtils.getContainerTransform(true)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -48,16 +44,22 @@ class RootFragment: Fragment(), EasyPermissions.PermissionCallbacks {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        enterTransition = MaterialFadeThrough()
+        reenterTransition = TransitionUtils.getTransitionBackward(true)
+        exitTransition = TransitionUtils.getTransitionBackward(false)
         initUi()
     }
 
     private fun initUi() {
         getLocation()
 
-        addBtn.setOnClickListener {
-            val extras = FragmentNavigatorExtras(addBtn to "shared_element_container")
-            findNavController().navigate(R.id.toAddFragment, null, null, extras)
+        viewModel.weather.observe(viewLifecycleOwner, Observer {
+            binding.weather = it
+//            weatherBlock.animation = AnimationUtil.fading(weatherBlock)
+//            cityName.animation = AnimationUtil.fading(cityName)
+        })
+
+        menuBtn.setOnClickListener {
+            findNavController().navigate(R.id.toListFragment)
         }
     }
 

@@ -2,6 +2,7 @@ package com.nikasov.weatherapp.utils
 
 import com.google.android.material.transition.MaterialContainerTransform
 import com.google.android.material.transition.MaterialElevationScale
+import com.google.android.material.transition.MaterialSharedAxis
 
 object TransitionUtils {
 
@@ -11,11 +12,22 @@ object TransitionUtils {
         return transition
     }
 
-
-    fun getContainerTransform(isGrowing: Boolean): MaterialElevationScale {
+    fun getElevationScale(isGrowing: Boolean): MaterialElevationScale {
         val transition = MaterialElevationScale(isGrowing)
         transition.duration = 350
         return transition
+    }
+
+    fun getTransitionBackward(direction: Boolean): MaterialSharedAxis {
+
+        val materialSharedAxis = if (direction) {
+            MaterialSharedAxis(MaterialSharedAxis.X, true)
+        } else {
+            MaterialSharedAxis(MaterialSharedAxis.X, false)
+        }
+        materialSharedAxis.duration = 350
+
+        return materialSharedAxis
     }
 
 }

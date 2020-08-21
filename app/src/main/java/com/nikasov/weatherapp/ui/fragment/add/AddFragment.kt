@@ -7,9 +7,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.google.android.material.transition.MaterialContainerTransform
-import com.google.android.material.transition.MaterialElevationScale
-import com.google.android.material.transition.MaterialFadeThrough
 import com.nikasov.weatherapp.R
 import com.nikasov.weatherapp.databinding.FragmentAddBinding
 import com.nikasov.weatherapp.utils.TransitionUtils

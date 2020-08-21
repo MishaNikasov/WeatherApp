@@ -11,7 +11,4 @@ class ResourceProvider @Inject constructor (var context : Context) {
         return context.resources.getString(resId)
     }
 
-    fun getAnimation(resId : Int) : Animation{
-        return AnimationUtils.loadAnimation(context, resId)
-    }
 }

@@ -11,11 +11,21 @@
         android:name="com.nikasov.weatherapp.ui.fragment.root.RootFragment"
         android:label="RootFragment" >
         <action
-            android:id="@+id/toAddFragment"
-            app:destination="@id/addFragment" />
+            android:id="@+id/toListFragment"
+            app:destination="@id/listFragment" />
     </fragment>
     <fragment
         android:id="@+id/addFragment"
         android:name="com.nikasov.weatherapp.ui.fragment.add.AddFragment"
         android:label="AddFragment" />
+    <fragment
+        android:id="@+id/listFragment"
+        android:name="com.nikasov.weatherapp.ui.fragment.list.ListFragment"
+        android:label="ListFragment">
+
+        <action
+            android:id="@+id/toAddFragment"
+            app:destination="@id/addFragment" />
+
+    </fragment>
 </navigation>
