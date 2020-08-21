@@ -13,7 +13,7 @@
             type="com.nikasov.weatherapp.ui.fragment.root.RootViewModel" />
         <variable
             name="weather"
-            type="com.nikasov.weatherapp.data.remote.model.WeatherResult" />
+            type="com.nikasov.weatherapp.data.local.model.WeatherModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -33,10 +33,10 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:background="?selectableItemBackgroundBorderless"
                 android:id="@+id/menuBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="?selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_round_menu"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -47,7 +47,7 @@
                 android:id="@+id/cityName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{weather.name + ',' + ' ' + weather.sys.country}"
+                android:text="@{weather.city}"
                 android:textColor="@color/colorPrimary"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -61,6 +61,7 @@
                 android:id="@+id/imageView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="?selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_more"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -86,7 +87,7 @@
                 android:id="@+id/weatherType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{weather.weather[0].main}"
+                android:text="@{weather.type}"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="@+id/temperature"
@@ -101,14 +102,14 @@
                 android:textColor="@color/colorPrimary"
                 android:textSize="85sp"
                 android:textStyle="bold"
-                app:double_to_int_convert="@{weather.main.temp}"
+                android:text="@{weather.temperature}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="20" />
 
             <TextView
                 android:id="@+id/textView"
-                temperature="@{weather}"
+                android:text="@{weather.metric}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorPrimary"
@@ -120,7 +121,7 @@
 
             <TextView
                 android:id="@+id/avgTemp"
-                avg_temperature="@{weather}"
+                android:text="@{weather.avgTemp}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
@@ -194,7 +195,7 @@
 
             <TextView
                 android:id="@+id/wind"
-                wind_speed="@{weather.wind.speed}"
+                android:text="@{weather.windSpeed}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
@@ -226,7 +227,7 @@
 
             <TextView
                 android:id="@+id/feelLikeTemp"
-                temperature_feel_like="@{weather.main.feels_like}"
+                android:text="@{weather.feelLikeTemp}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
@@ -268,8 +269,8 @@
                 app:layout_constraintTop_toBottomOf="@+id/secondLine" />
 
             <TextView
-                android:id="@+id/textView2"
-                pressure="@{weather.main.pressure}"
+                android:id="@+id/pressure"
+                android:text="@{weather.pressure}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
@@ -303,8 +304,8 @@
                 app:layout_constraintTop_toBottomOf="@+id/secondLine" />
 
             <TextView
-                android:id="@+id/textView3"
-                humidity="@{weather.main.humidity}"
+                android:id="@+id/humidity"
+                android:text="@{weather.humidity}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
@@ -336,7 +337,7 @@
 
             <TextView
                 android:id="@+id/date"
-                date_setter="@{weather.dt}"
+                android:text="@{weather.date}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="12dp"

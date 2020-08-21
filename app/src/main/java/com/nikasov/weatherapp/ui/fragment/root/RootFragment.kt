@@ -17,6 +17,7 @@ import com.google.android.material.transition.MaterialFadeThrough
 import com.nikasov.weatherapp.R
 import com.nikasov.weatherapp.databinding.FragmentRootBinding
 import com.nikasov.weatherapp.utils.AnimationUtil
+import com.nikasov.weatherapp.utils.ModelConverter
 import com.nikasov.weatherapp.utils.PermissionsUtil
 import com.nikasov.weatherapp.utils.TransitionUtils
 import dagger.hilt.android.AndroidEntryPoint
@@ -53,7 +54,7 @@ class RootFragment: Fragment(), EasyPermissions.PermissionCallbacks {
         getLocation()
 
         viewModel.weather.observe(viewLifecycleOwner, Observer {
-            binding.weather = it
+            binding.weather = ModelConverter.remoteToLocal(it, requireContext())
 //            weatherBlock.animation = AnimationUtil.fading(weatherBlock)
 //            cityName.animation = AnimationUtil.fading(cityName)
         })

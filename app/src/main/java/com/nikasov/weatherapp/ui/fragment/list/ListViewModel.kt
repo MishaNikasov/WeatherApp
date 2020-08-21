@@ -6,4 +6,5 @@ import androidx.lifecycle.ViewModel
 class ListViewModel @ViewModelInject constructor(
 
 ): ViewModel() {
+
 }
