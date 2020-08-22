@@ -1,4 +1,4 @@
-package com.nikasov.weatherapp.data.remote.model
+package com.nikasov.weatherapp.data.remote.model.weather
 
 data class Wind(
     val deg: Int,

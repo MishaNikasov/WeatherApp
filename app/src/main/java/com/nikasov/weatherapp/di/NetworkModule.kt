@@ -27,6 +27,7 @@ object NetworkModule {
                 .newBuilder()
                 .addQueryParameter("appid", Constants.WEATHER_API_KEY)
                 .addQueryParameter("units", Constants.METRIC_TYPE)
+                .addQueryParameter("lang", Constants.LANG_RU)
                 .build()
 
             val request = chain.request()

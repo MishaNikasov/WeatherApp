@@ -4,8 +4,14 @@
     <string name="search">Search</string>
     <string name="celsius">°C</string>
     <string name="day_format">EEEE, d</string>
+    <string name="daily_format">EE</string>
     <string name="c">°C</string>
     <string name="c_small">°c</string>
     <string name="wind_speed">км/ч</string>
     <string name="pressure">mb</string>
+    <string name="wind_speed_txt">Скорость ветра</string>
+    <string name="feel_like">Ощущается</string>
+    <string name="pressure_txt">Давление</string>
+    <string name="humidity_txt">Влажность</string>
+    <string name="info">Подробности</string>
 </resources>

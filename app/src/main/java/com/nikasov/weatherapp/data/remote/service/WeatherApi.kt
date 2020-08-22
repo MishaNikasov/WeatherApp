@@ -1,6 +1,7 @@
 package com.nikasov.weatherapp.data.remote.service
 
-import com.nikasov.weatherapp.data.remote.model.WeatherResult
+import com.nikasov.weatherapp.data.remote.model.forecast.ForecastResult
+import com.nikasov.weatherapp.data.remote.model.weather.WeatherResult
 import io.reactivex.Flowable
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -17,5 +18,13 @@ interface WeatherApi {
         @Query("lat") lat : String,
         @Query("lon") lon : String
     ) : Flowable<WeatherResult>
+
+    @GET("onecall")
+    fun getFiveDaysWeather(
+        @Query("lat") lat : String,
+        @Query("lon") lon : String,
+        @Query("cnt") cnt : Int,
+        @Query("exclude") exclude : String = "hourly,minutely,current"
+    ) : Flowable<ForecastResult>
 
 }

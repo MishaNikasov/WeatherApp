@@ -3,7 +3,7 @@ package com.nikasov.weatherapp.ui.fragment.add
 import android.view.ViewGroup
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
-import com.nikasov.weatherapp.data.remote.model.WeatherResult
+import com.nikasov.weatherapp.data.remote.model.weather.WeatherResult
 import com.nikasov.weatherapp.data.remote.repository.WeatherRepository
 import com.nikasov.weatherapp.utils.AnimationUtil
 import io.reactivex.Observer

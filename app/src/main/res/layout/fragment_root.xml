@@ -19,7 +19,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
+        android:background="@drawable/gradient_bg"
         app:layout_constraintEnd_toStartOf="@+id/textInputLayout"
         app:layout_constraintStart_toStartOf="@+id/textInputLayout">
 
@@ -41,14 +41,15 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/colorPrimary" />
+                app:tint="@color/white"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/cityName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{weather.city}"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/white"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -58,6 +59,7 @@
                 tools:visibility="visible" />
 
             <ImageView
+                android:clickable="true"
                 android:id="@+id/imageView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -66,11 +68,12 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/colorPrimary" />
+                app:tint="@color/white" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            app:swipeRefreshLayoutProgressSpinnerBackgroundColor="@color/colorPrimary"
             android:id="@+id/loading"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -87,9 +90,9 @@
                     android:id="@+id/weatherBlock"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="24dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="12dp"
                     android:hint="@string/city"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -97,35 +100,24 @@
                     tools:visibility="visible">
 
                     <TextView
-                        android:id="@+id/weatherType"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@{weather.type}"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        app:layout_constraintStart_toStartOf="@+id/temperature"
-                        app:layout_constraintTop_toBottomOf="@+id/avgTemp"
-                        tools:ignore="MissingConstraints"
-                        tools:text="Weather" />
-
-                    <TextView
                         android:id="@+id/temperature"
+                        style="@style/TextBold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@{weather.temperature}"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="85sp"
+                        android:textColor="@color/white"
+                        android:textSize="100sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        tools:text="20" />
+                        tools:text="17" />
 
                     <TextView
                         android:id="@+id/textView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@{weather.metric}"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/white"
                         android:textSize="25sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toEndOf="@+id/temperature"
@@ -138,23 +130,61 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:text="@{weather.avgTemp}"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="14sp"
-                        android:textStyle="italic"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/temperature"
                         app:layout_constraintTop_toBottomOf="@id/temperature"
                         tools:text="20°c/25°c" />
 
+                    <TextView
+                        android:id="@+id/weatherType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{weather.type}"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toStartOf="@+id/temperature"
+                        app:layout_constraintTop_toBottomOf="@+id/avgTemp"
+                        tools:ignore="MissingConstraints"
+                        tools:text="Weather" />
+
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:src="@{weather.icon}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/white"
+                        tools:src="@drawable/ic_01d" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:elevation="2dp"
+                    android:id="@+id/dailyRecycler"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginBottom="12dp"
+                    android:background="@drawable/light_primary_rounded_bg"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toTopOf="@+id/infoBlock"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:itemCount="3"
+                    tools:listitem="@layout/item_daily" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/infoBlock"
+                    android:elevation="2dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginEnd="24dp"
-                    android:layout_marginBottom="24dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginBottom="12dp"
                     android:background="@drawable/light_primary_rounded_bg"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -166,7 +196,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:layout_marginTop="12dp"
-                        android:text="Подробности"
+                        android:text="@string/info"
                         android:textColor="@color/white"
                         android:textSize="14sp"
                         android:textStyle="bold"
@@ -189,7 +219,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:layout_marginTop="12dp"
-                        android:text="Скорость ветра"
+                        android:text="@string/wind_speed_txt"
                         android:textColor="@color/white_transparent"
                         android:textSize="@dimen/small_text"
                         app:layout_constraintStart_toStartOf="parent"
@@ -213,7 +243,8 @@
                         app:layout_constraintBottom_toTopOf="@+id/secondLine"
                         app:layout_constraintEnd_toStartOf="@+id/middleLine"
                         app:layout_constraintTop_toTopOf="@+id/middleLine"
-                        app:tint="@color/white" />
+                        app:tint="@color/white"
+                        tools:ignore="ContentDescription" />
 
                     <TextView
                         android:id="@+id/feelLikeTempTxt"
@@ -221,7 +252,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:layout_marginTop="12dp"
-                        android:text="Ощущается"
+                        android:text="@string/feel_like"
                         android:textColor="@color/white_transparent"
                         android:textSize="@dimen/small_text"
                         app:layout_constraintStart_toEndOf="@+id/middleLine"
@@ -246,7 +277,8 @@
                         app:layout_constraintBottom_toTopOf="@+id/secondLine"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/middleLine"
-                        app:tint="@color/white" />
+                        app:tint="@color/white"
+                        tools:ignore="ContentDescription" />
 
                     <include
                         android:id="@+id/secondLine"
@@ -264,7 +296,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:layout_marginTop="12dp"
-                        android:text="Давление"
+                        android:text="@string/pressure_txt"
                         android:textColor="@color/white_transparent"
                         android:textSize="@dimen/small_text"
                         app:layout_constraintStart_toStartOf="@+id/secondLine"
@@ -291,7 +323,8 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/middleLine"
                         app:layout_constraintTop_toTopOf="@+id/secondLine"
-                        app:tint="@color/white" />
+                        app:tint="@color/white"
+                        tools:ignore="ContentDescription" />
 
                     <TextView
                         android:id="@+id/t2Txt"
@@ -299,7 +332,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:layout_marginTop="12dp"
-                        android:text="Влажность"
+                        android:text="@string/humidity_txt"
                         android:textColor="@color/white_transparent"
                         android:textSize="@dimen/small_text"
                         app:layout_constraintStart_toEndOf="@+id/middleLine"
@@ -325,7 +358,8 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/secondLine"
-                        app:tint="@color/white" />
+                        app:tint="@color/white"
+                        tools:ignore="ContentDescription" />
 
                     <include
                         android:id="@+id/middleLine"
@@ -345,7 +379,6 @@
                         android:text="@{weather.date}"
                         android:textColor="@color/white"
                         android:textSize="12sp"
-                        android:textStyle="italic"
                         app:layout_constraintBottom_toBottomOf="@+id/infoTxt"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/infoTxt"

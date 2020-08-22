@@ -1,5 +1,7 @@
 package com.nikasov.weatherapp.data.local.model
 
+import android.graphics.drawable.Drawable
+
 data class WeatherModel(
     var city: String = "",
     var type: String = "",
@@ -10,5 +12,6 @@ data class WeatherModel(
     var feelLikeTemp: String = "",
     var pressure: String = "",
     var humidity: String = "",
-    var temperature: String = ""
+    var temperature: String = "",
+    var icon: Drawable? = null
 )

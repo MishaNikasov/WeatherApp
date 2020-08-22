@@ -13,7 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.gms.location.LocationServices
 import com.nikasov.weatherapp.R
 import com.nikasov.weatherapp.databinding.FragmentRootBinding
-import com.nikasov.weatherapp.utils.ModelConverter
+import com.nikasov.weatherapp.ui.adapter.DailyAdapter
 import com.nikasov.weatherapp.utils.PermissionsUtil
 import com.nikasov.weatherapp.utils.TransitionUtils
 import dagger.hilt.android.AndroidEntryPoint
@@ -48,9 +48,10 @@ class RootFragment: Fragment(),
 
     private fun initUi() {
         getLocation()
+        setDailyList()
 
-        viewModel.weather.observe(viewLifecycleOwner, Observer {
-            binding.weather = ModelConverter.remoteToLocal(it, requireContext())
+        viewModel.weather.observe(viewLifecycleOwner, Observer { model ->
+            binding.weather = model
 //            weatherBlock.animation = AnimationUtil.fading(weatherBlock)
 //            cityName.animation = AnimationUtil.fading(cityName)
         })
@@ -66,6 +67,18 @@ class RootFragment: Fragment(),
         loading.setOnRefreshListener {
             getLocation()
         }
+    }
+
+    private fun setDailyList() {
+
+        val dailyAdapter = DailyAdapter()
+        dailyRecycler.apply {
+            adapter = dailyAdapter
+        }
+
+        viewModel.dailyList.observe(viewLifecycleOwner, Observer { list ->
+            dailyAdapter.submitList(list)
+        })
     }
 
     @SuppressLint("MissingPermission")
