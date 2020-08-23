@@ -10,22 +10,22 @@ class WeatherRepository @Inject constructor(
     private val weatherApi: WeatherApi
 ) {
 
-    fun getWeather(location : String) : Flowable<WeatherResult> {
+    suspend fun getWeather(location : String) : WeatherResult {
         return weatherApi.getWeather(location)
     }
 
-    fun getWeatherByCoordinates(
+    suspend fun getWeatherByCoordinates(
        lat : String,
        lon : String
-    ) : Flowable<WeatherResult> {
+    ) : WeatherResult {
         return weatherApi.getWeatherByCoordinates(lat, lon)
     }
 
-    fun getFiveDaysWeather(
+    suspend fun getFiveDaysWeather(
         lat : String,
         lon : String,
         cnt: Int
-    ) : Flowable<ForecastResult> {
+    ) : ForecastResult {
         return weatherApi.getFiveDaysWeather(lat, lon, cnt)
     }
 

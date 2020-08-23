@@ -9,22 +9,22 @@ import retrofit2.http.Query
 interface WeatherApi {
 
     @GET("weather")
-    fun getWeather(
+    suspend fun getWeather(
         @Query("q") location : String
-    ) : Flowable<WeatherResult>
+    ) : WeatherResult
 
     @GET("weather")
-    fun getWeatherByCoordinates(
+    suspend fun getWeatherByCoordinates(
         @Query("lat") lat : String,
         @Query("lon") lon : String
-    ) : Flowable<WeatherResult>
+    ) : WeatherResult
 
     @GET("onecall")
-    fun getFiveDaysWeather(
+    suspend fun getFiveDaysWeather(
         @Query("lat") lat : String,
         @Query("lon") lon : String,
         @Query("cnt") cnt : Int,
         @Query("exclude") exclude : String = "hourly,minutely,current"
-    ) : Flowable<ForecastResult>
+    ) : ForecastResult
 
 }

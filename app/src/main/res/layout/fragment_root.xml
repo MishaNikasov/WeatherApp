@@ -59,11 +59,11 @@
                 tools:visibility="visible" />
 
             <ImageView
-                android:clickable="true"
                 android:id="@+id/imageView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="?selectableItemBackgroundBorderless"
+                android:clickable="true"
                 android:src="@drawable/ic_more"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -150,6 +150,7 @@
                         tools:text="Weather" />
 
                     <ImageView
+                        android:id="@+id/imageView"
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:src="@{weather.icon}"
@@ -162,7 +163,6 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:elevation="2dp"
                     android:id="@+id/dailyRecycler"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -170,6 +170,7 @@
                     android:layout_marginEnd="12dp"
                     android:layout_marginBottom="12dp"
                     android:background="@drawable/light_primary_rounded_bg"
+                    android:elevation="3dp"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintBottom_toTopOf="@+id/infoBlock"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -179,13 +180,13 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/infoBlock"
-                    android:elevation="2dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:layout_marginEnd="12dp"
                     android:layout_marginBottom="12dp"
                     android:background="@drawable/light_primary_rounded_bg"
+                    android:elevation="3dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent">
@@ -198,7 +199,6 @@
                         android:layout_marginTop="12dp"
                         android:text="@string/info"
                         android:textColor="@color/white"
-                        android:textSize="14sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -378,7 +378,6 @@
                         android:layout_marginEnd="12dp"
                         android:text="@{weather.date}"
                         android:textColor="@color/white"
-                        android:textSize="12sp"
                         app:layout_constraintBottom_toBottomOf="@+id/infoTxt"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/infoTxt"

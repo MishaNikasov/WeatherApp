@@ -12,7 +12,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:background="@color/white"
+        android:background="@drawable/gradient_bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -26,27 +26,27 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:background="?selectableItemBackgroundBorderless"
                 android:id="@+id/backBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="?selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_left"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/colorPrimary" />
+                app:tint="@color/white" />
 
             <TextView
                 android:id="@+id/cityName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorPrimary"
+                android:text="List"
+                android:textColor="@color/white"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:text="List"
                 tools:visibility="visible" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -58,8 +58,9 @@
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="24dp"
             android:src="@drawable/ic_round_add"
+            android:tint="@color/colorPrimary"
             android:transitionName="shared_element_container"
-            app:backgroundTint="@color/colorPrimary"
+            app:backgroundTint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
