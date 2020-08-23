@@ -1,9 +1,10 @@
 package com.nikasov.weatherapp.data.remote.repository
 
 import com.nikasov.weatherapp.data.remote.model.forecast.ForecastResult
+import com.nikasov.weatherapp.data.remote.model.onecall.OnecallResult
 import com.nikasov.weatherapp.data.remote.model.weather.WeatherResult
 import com.nikasov.weatherapp.data.remote.service.WeatherApi
-import io.reactivex.Flowable
+import retrofit2.http.Query
 import javax.inject.Inject
 
 class WeatherRepository @Inject constructor(
@@ -25,8 +26,15 @@ class WeatherRepository @Inject constructor(
         lat : String,
         lon : String,
         cnt: Int
-    ) : ForecastResult {
+    ) : OnecallResult {
         return weatherApi.getFiveDaysWeather(lat, lon, cnt)
     }
+
+    suspend fun getForecastByCityId(
+       id : Int
+    ) : ForecastResult {
+        return weatherApi.getForecastByCityId(id)
+    }
+
 
 }

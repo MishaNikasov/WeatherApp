@@ -1,4 +1,4 @@
-package com.nikasov.weatherapp.data.remote.model.forecast
+package com.nikasov.weatherapp.data.remote.model.onecall
 
 data class Daily(
     val clouds: Int,

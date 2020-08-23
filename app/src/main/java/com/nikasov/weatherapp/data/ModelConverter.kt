@@ -1,11 +1,13 @@
 package com.nikasov.weatherapp.data
 
 import android.graphics.drawable.Drawable
-import androidx.core.content.ContextCompat
 import com.nikasov.weatherapp.R
 import com.nikasov.weatherapp.data.local.model.DailyModel
+import com.nikasov.weatherapp.data.local.model.ForecastModel
 import com.nikasov.weatherapp.data.local.model.WeatherModel
-import com.nikasov.weatherapp.data.remote.model.forecast.Daily
+import com.nikasov.weatherapp.data.remote.model.forecast.Forecast
+import com.nikasov.weatherapp.data.remote.model.forecast.ForecastResult
+import com.nikasov.weatherapp.data.remote.model.onecall.Daily
 import com.nikasov.weatherapp.data.remote.model.weather.WeatherResult
 import com.nikasov.weatherapp.utils.DateUtils
 import com.nikasov.weatherapp.utils.ResourceProvider
@@ -44,6 +46,19 @@ object ModelConverter {
         model.avgTemp = "${(daily.temp.min).toInt()}°c / ${(daily.temp.max).toInt()}°c"
         model.icon = getIcon(daily.weather[0].icon, resourceProvider)
         return model
+    }
+
+    fun remoteToForecast(forecast: Forecast, resourceProvider: ResourceProvider): ForecastModel {
+        val forecastModel = ForecastModel()
+
+        forecastModel.weather = forecast.weather[0].main
+        forecastModel.day = getDate(forecast.dt*1000, resourceProvider.getString(R.string.daily_format))
+        forecastModel.date = getDate(forecast.dt*1000, resourceProvider.getString(R.string.date_format))
+        forecastModel.tempMax = "${forecast.main.temp_max.toInt()}°"
+        forecastModel.tempMin = "${forecast.main.temp_min.toInt()}°"
+        forecastModel.icon = getIcon(forecast.weather[0].icon, resourceProvider)
+
+        return forecastModel
     }
 
     private fun getIcon(icon: String, resourceProvider: ResourceProvider): Drawable? {

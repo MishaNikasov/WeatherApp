@@ -4,6 +4,7 @@
     <string name="search">Search</string>
     <string name="celsius">°C</string>
     <string name="day_format">EEEE, d</string>
+    <string name="date_format">dd.mm</string>
     <string name="daily_format">EE</string>
     <string name="c">°C</string>
     <string name="c_small">°c</string>
@@ -14,4 +15,5 @@
     <string name="pressure_txt">Давление</string>
     <string name="humidity_txt">Влажность</string>
     <string name="info">Подробности</string>
+    <string name="forecast_five_days">Прогноз на 5 дней</string>
 </resources>

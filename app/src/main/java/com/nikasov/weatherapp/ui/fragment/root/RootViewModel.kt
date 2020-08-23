@@ -9,7 +9,7 @@ import com.nikasov.weatherapp.common.Constants
 import com.nikasov.weatherapp.data.ModelConverter
 import com.nikasov.weatherapp.data.local.model.DailyModel
 import com.nikasov.weatherapp.data.local.model.WeatherModel
-import com.nikasov.weatherapp.data.remote.model.forecast.ForecastResult
+import com.nikasov.weatherapp.data.remote.model.onecall.OnecallResult
 import com.nikasov.weatherapp.data.remote.model.weather.WeatherResult
 import com.nikasov.weatherapp.data.remote.repository.WeatherRepository
 import com.nikasov.weatherapp.utils.ResourceProvider
@@ -23,6 +23,8 @@ class RootViewModel @ViewModelInject constructor(
 
     var view : View? = null
     var root : View? = null
+
+    var cityId: Int? = null
 
     val isLoading = MutableLiveData<Boolean>(false)
     val weather = MutableLiveData<WeatherModel>()
@@ -51,12 +53,12 @@ class RootViewModel @ViewModelInject constructor(
         }
     }
 
-    private fun setForecast(forecastResult: ForecastResult) {
+    private fun setForecast(onecallResult: OnecallResult) {
 
         val modelsList = arrayListOf<DailyModel>()
 
         for (i in 0..2) {
-            val day = forecastResult.daily[i]
+            val day = onecallResult.daily[i]
             val model = ModelConverter.remoteDailyToLocal(day, resourceProvider)
             modelsList.add(model)
         }
@@ -64,6 +66,7 @@ class RootViewModel @ViewModelInject constructor(
     }
 
     private fun setWeather(weatherResult: WeatherResult) {
+        cityId = weatherResult.id
         weather.postValue(ModelConverter.remoteWeatherToLocal(weatherResult, resourceProvider))
     }
 }

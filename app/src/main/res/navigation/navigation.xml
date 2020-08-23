@@ -13,6 +13,9 @@
         <action
             android:id="@+id/toListFragment"
             app:destination="@id/listFragment" />
+        <action
+            android:id="@+id/fromRootToForecastFragment"
+            app:destination="@id/forecastFragment" />
     </fragment>
     <fragment
         android:id="@+id/addFragment"
@@ -22,10 +25,19 @@
         android:id="@+id/listFragment"
         android:name="com.nikasov.weatherapp.ui.fragment.list.ListFragment"
         android:label="ListFragment">
-
         <action
             android:id="@+id/toAddFragment"
             app:destination="@id/addFragment" />
-
+        <action
+            android:id="@+id/action_listFragment_to_forecastFragment"
+            app:destination="@id/forecastFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/forecastFragment"
+        android:name="com.nikasov.weatherapp.ui.fragment.forecast.ForecastFragment"
+        android:label="ForecastFragment" >
+        <argument
+            android:name="cityId"
+            app:argType="integer" />
     </fragment>
 </navigation>

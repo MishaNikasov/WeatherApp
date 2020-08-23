@@ -9,18 +9,20 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.location.LocationServices
+import com.google.android.material.transition.Hold
 import com.nikasov.weatherapp.R
 import com.nikasov.weatherapp.databinding.FragmentRootBinding
 import com.nikasov.weatherapp.ui.adapter.DailyAdapter
 import com.nikasov.weatherapp.utils.PermissionsUtil
 import com.nikasov.weatherapp.utils.TransitionUtils
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_list.*
 import kotlinx.android.synthetic.main.fragment_root.*
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
-import timber.log.Timber
 
 @AndroidEntryPoint
 class RootFragment: Fragment(),
@@ -42,8 +44,6 @@ class RootFragment: Fragment(),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        reenterTransition = TransitionUtils.getTransitionBackward(true)
-        exitTransition = TransitionUtils.getTransitionBackward(false)
         initUi()
     }
 
@@ -62,12 +62,23 @@ class RootFragment: Fragment(),
         })
 
         menuBtn.setOnClickListener {
+            reenterTransition = TransitionUtils.getTransitionBackward(true)
+            exitTransition = TransitionUtils.getTransitionBackward(false)
             findNavController().navigate(R.id.toListFragment)
+        }
+
+        moreForecast.setOnClickListener {
+            reenterTransition = TransitionUtils.getHold()
+            exitTransition = TransitionUtils.getHold()
+            val action = RootFragmentDirections.fromRootToForecastFragment(viewModel.cityId!!)
+            val extras = FragmentNavigatorExtras(forecastBlock to "forecastTransition")
+            findNavController().navigate(action, extras)
         }
 
         loading.setOnRefreshListener {
             getLocation()
         }
+
     }
 
     private fun setDailyList() {

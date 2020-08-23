@@ -162,21 +162,46 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/dailyRecycler"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/forecastBlock"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:layout_marginEnd="12dp"
                     android:layout_marginBottom="12dp"
                     android:background="@drawable/light_primary_rounded_bg"
-                    android:elevation="3dp"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:transitionName="forecastTransition"
                     app:layout_constraintBottom_toTopOf="@+id/infoBlock"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    tools:itemCount="3"
-                    tools:listitem="@layout/item_daily" />
+                    app:layout_constraintStart_toStartOf="parent">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/dailyRecycler"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:elevation="3dp"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:layout_constraintBottom_toTopOf="@id/moreForecast"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:itemCount="3"
+                        tools:listitem="@layout/item_daily" />
+
+                    <TextView
+                        android:id="@+id/moreForecast"
+                        style="@style/MyButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="@string/forecast_five_days"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/dailyRecycler" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/infoBlock"
