@@ -28,14 +28,12 @@ class ForecastAdapter(private val interaction: Interaction? = null) :
     private val differ = AsyncListDiffer(this, DIFF_CALLBACK)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-
         return ForecastViewHolder(
             LayoutInflater.from(parent.context).inflate(
                 R.layout.item_forecast_long,
                 parent,
                 false
-            ),
-            interaction
+            )
         )
     }
 
@@ -56,6 +54,7 @@ class ForecastAdapter(private val interaction: Interaction? = null) :
                 holder.itemView.setOnClickListener {
                     val previousItem: Int = selectedItem
                     selectedItem = position
+                    interaction?.onItemSelected(position, differ.currentList[position])
 
                     notifyItemChanged(previousItem)
                     notifyItemChanged(position)
@@ -74,14 +73,10 @@ class ForecastAdapter(private val interaction: Interaction? = null) :
 
     class ForecastViewHolder
     constructor(
-        itemView: View,
-        private val interaction: Interaction?
+        itemView: View
     ) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(item: ForecastModel) = with(itemView) {
-//            itemView.setOnClickListener {
-//                interaction?.onItemSelected(adapterPosition, item)
-//            }
             itemView.day.text = item.day
             itemView.date.text = item.date
             itemView.weather.text = item.weather

@@ -8,6 +8,7 @@ import com.nikasov.weatherapp.data.ModelConverter
 import com.nikasov.weatherapp.data.local.model.ForecastModel
 import com.nikasov.weatherapp.data.remote.repository.WeatherRepository
 import com.nikasov.weatherapp.utils.ResourceProvider
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class ForecastViewModel @ViewModelInject constructor(
@@ -17,15 +18,18 @@ class ForecastViewModel @ViewModelInject constructor(
 
     val forecastList = MutableLiveData<List<ForecastModel>>()
 
-    fun getForecastList(cityId: Int) {
-        viewModelScope.launch {
+    fun getForecastList(lat : String, lon : String) {
+        viewModelScope.launch (Dispatchers.IO) {
             val list = arrayListOf<ForecastModel>()
-            val forecast = weatherRepository.getForecastByCityId(cityId)
+            val forecast = weatherRepository.getDailyForecast(lat, lon, 3)
 
-            forecast.list.forEach {
-                val model = ModelConverter.remoteToForecast(it, resourceProvider)
+            forecast.daily.forEach {
+                val model = ModelConverter.remoteDailyToForecastModel(
+                    it, lat, lon, resourceProvider
+                )
                 list.add(model)
             }
+
             forecastList.postValue(list)
         }
     }

@@ -15,7 +15,7 @@ import java.util.*
 
 object ModelConverter {
 
-    fun remoteWeatherToLocal(weatherResult: WeatherResult, resourceProvider: ResourceProvider): WeatherModel {
+    fun remoteWeatherToWeatherModel(weatherResult: WeatherResult, resourceProvider: ResourceProvider): WeatherModel {
         val weather = WeatherModel()
 
         weather.city = "${weatherResult.name}, ${weatherResult.sys.country}"
@@ -36,7 +36,7 @@ object ModelConverter {
         return weather
     }
 
-    fun remoteDailyToLocal(daily: Daily, resourceProvider: ResourceProvider): DailyModel {
+    fun remoteDailyToDailyModel(daily: Daily, resourceProvider: ResourceProvider): DailyModel {
         val model = DailyModel()
         model.weather = daily.weather[0].description
         model.date = getDate(
@@ -48,15 +48,23 @@ object ModelConverter {
         return model
     }
 
-    fun remoteToForecast(forecast: Forecast, resourceProvider: ResourceProvider): ForecastModel {
-        val forecastModel = ForecastModel()
-
-        forecastModel.weather = forecast.weather[0].main
-        forecastModel.day = getDate(forecast.dt*1000, resourceProvider.getString(R.string.daily_format))
-        forecastModel.date = getDate(forecast.dt*1000, resourceProvider.getString(R.string.date_format))
-        forecastModel.tempMax = "${forecast.main.temp_max.toInt()}°"
-        forecastModel.tempMin = "${forecast.main.temp_min.toInt()}°"
-        forecastModel.icon = getIcon(forecast.weather[0].icon, resourceProvider)
+    fun remoteDailyToForecastModel(
+        daily: Daily,
+        lat: String,
+        lon: String,
+        resourceProvider: ResourceProvider
+    ): ForecastModel {
+        val forecastModel = ForecastModel(
+            lat,
+            lon,
+            daily.dt
+        )
+        forecastModel.weather = daily.weather[0].main
+        forecastModel.day = getDate(daily.dt*1000, resourceProvider.getString(R.string.daily_format))
+        forecastModel.date = getDate(daily.dt*1000, resourceProvider.getString(R.string.date_format))
+        forecastModel.tempMax = "${daily.temp.max.toInt()}°"
+        forecastModel.tempMin = "${daily.temp.min.toInt()}°"
+        forecastModel.icon = getIcon(daily.weather[0].icon, resourceProvider)
 
         return forecastModel
     }

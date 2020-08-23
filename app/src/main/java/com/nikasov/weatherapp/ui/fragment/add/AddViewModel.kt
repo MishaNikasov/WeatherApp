@@ -17,6 +17,12 @@ class AddViewModel @ViewModelInject constructor(
     private val weatherRepository: WeatherRepository
 ) : ViewModel() {
 
+    var cityArray: Array<String> = emptyArray()
+
+    fun fetCityArray() {
+        cityArray
+    }
+
     private fun getWeatherByCity(location: String) {
         viewModelScope.launch {
             weatherRepository.getWeather(location)

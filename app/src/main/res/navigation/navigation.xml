@@ -37,7 +37,10 @@
         android:name="com.nikasov.weatherapp.ui.fragment.forecast.ForecastFragment"
         android:label="ForecastFragment" >
         <argument
-            android:name="cityId"
-            app:argType="integer" />
+            android:name="latitude"
+            app:argType="string" />
+        <argument
+            android:name="longitude"
+            app:argType="string" />
     </fragment>
 </navigation>

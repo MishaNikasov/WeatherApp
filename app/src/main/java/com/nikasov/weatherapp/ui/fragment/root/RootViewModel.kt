@@ -1,6 +1,5 @@
 package com.nikasov.weatherapp.ui.fragment.root
 
-import android.view.View
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,6 +12,7 @@ import com.nikasov.weatherapp.data.remote.model.onecall.OnecallResult
 import com.nikasov.weatherapp.data.remote.model.weather.WeatherResult
 import com.nikasov.weatherapp.data.remote.repository.WeatherRepository
 import com.nikasov.weatherapp.utils.ResourceProvider
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
@@ -21,10 +21,8 @@ class RootViewModel @ViewModelInject constructor(
     private val resourceProvider: ResourceProvider
 ) : ViewModel() {
 
-    var view : View? = null
-    var root : View? = null
-
-    var cityId: Int? = null
+    var latitude: String? = null
+    var longitude: String? = null
 
     val isLoading = MutableLiveData<Boolean>(false)
     val weather = MutableLiveData<WeatherModel>()
@@ -35,7 +33,7 @@ class RootViewModel @ViewModelInject constructor(
         lon : String
     ) {
 
-        viewModelScope.launch {
+        viewModelScope.launch (Dispatchers.IO) {
 
             isLoading.postValue(true)
 
@@ -43,7 +41,7 @@ class RootViewModel @ViewModelInject constructor(
                 weatherRepository.getWeatherByCoordinates(lat, lon)
             }
             val forecastResult = async {
-                weatherRepository.getFiveDaysWeather(lat, lon, Constants.FORECAST_DAYS)
+                weatherRepository.getDailyForecast(lat, lon, Constants.FORECAST_DAYS)
             }
 
             setWeather(weatherResult.await())
@@ -59,14 +57,15 @@ class RootViewModel @ViewModelInject constructor(
 
         for (i in 0..2) {
             val day = onecallResult.daily[i]
-            val model = ModelConverter.remoteDailyToLocal(day, resourceProvider)
+            val model = ModelConverter.remoteDailyToDailyModel(day, resourceProvider)
             modelsList.add(model)
         }
         dailyList.postValue(modelsList)
     }
 
     private fun setWeather(weatherResult: WeatherResult) {
-        cityId = weatherResult.id
-        weather.postValue(ModelConverter.remoteWeatherToLocal(weatherResult, resourceProvider))
+        latitude = weatherResult.coord.lat.toString()
+        longitude = weatherResult.coord.lat.toString()
+        weather.postValue(ModelConverter.remoteWeatherToWeatherModel(weatherResult, resourceProvider))
     }
 }

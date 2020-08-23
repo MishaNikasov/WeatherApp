@@ -12,14 +12,12 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.location.LocationServices
-import com.google.android.material.transition.Hold
 import com.nikasov.weatherapp.R
 import com.nikasov.weatherapp.databinding.FragmentRootBinding
 import com.nikasov.weatherapp.ui.adapter.DailyAdapter
 import com.nikasov.weatherapp.utils.PermissionsUtil
 import com.nikasov.weatherapp.utils.TransitionUtils
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_list.*
 import kotlinx.android.synthetic.main.fragment_root.*
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
@@ -70,7 +68,7 @@ class RootFragment: Fragment(),
         moreForecast.setOnClickListener {
             reenterTransition = TransitionUtils.getHold()
             exitTransition = TransitionUtils.getHold()
-            val action = RootFragmentDirections.fromRootToForecastFragment(viewModel.cityId!!)
+            val action = RootFragmentDirections.fromRootToForecastFragment(viewModel.latitude!!, viewModel.latitude!!)
             val extras = FragmentNavigatorExtras(forecastBlock to "forecastTransition")
             findNavController().navigate(action, extras)
         }
@@ -82,12 +80,10 @@ class RootFragment: Fragment(),
     }
 
     private fun setDailyList() {
-
         val dailyAdapter = DailyAdapter()
         dailyRecycler.apply {
             adapter = dailyAdapter
         }
-
         viewModel.dailyList.observe(viewLifecycleOwner, Observer { list ->
             dailyAdapter.submitList(list)
         })

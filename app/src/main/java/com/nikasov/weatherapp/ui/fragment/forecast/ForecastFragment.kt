@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.nikasov.weatherapp.R
+import com.nikasov.weatherapp.data.local.model.ForecastModel
 import com.nikasov.weatherapp.databinding.FragmentForecastBinding
 import com.nikasov.weatherapp.ui.adapter.ForecastAdapter
 import com.nikasov.weatherapp.utils.TransitionUtils
@@ -52,9 +53,16 @@ class ForecastFragment: Fragment() {
 
     private fun initList() {
 
-        viewModel.getForecastList(args.cityId)
+        viewModel.getForecastList(args.latitude, args.longitude)
 
-        val forecastAdapter = ForecastAdapter()
+        val interaction = object : ForecastAdapter.Interaction {
+            override fun onItemSelected(position: Int, item: ForecastModel) {
+                Timber.d(item.date)
+            }
+        }
+
+        val forecastAdapter = ForecastAdapter(interaction)
+
         forecastRecycler.apply {
             adapter = forecastAdapter
         }
