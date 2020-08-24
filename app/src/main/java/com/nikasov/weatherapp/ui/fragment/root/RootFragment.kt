@@ -68,7 +68,7 @@ class RootFragment: Fragment(),
         moreForecast.setOnClickListener {
             reenterTransition = TransitionUtils.getHold()
             exitTransition = TransitionUtils.getHold()
-            val action = RootFragmentDirections.fromRootToForecastFragment(viewModel.latitude!!, viewModel.latitude!!)
+            val action = RootFragmentDirections.fromRootToForecastFragment(viewModel.latitude!!, viewModel.longitude!!)
             val extras = FragmentNavigatorExtras(forecastBlock to "forecastTransition")
             findNavController().navigate(action, extras)
         }
@@ -80,7 +80,7 @@ class RootFragment: Fragment(),
     }
 
     private fun setDailyList() {
-        val dailyAdapter = DailyAdapter()
+            val dailyAdapter = DailyAdapter()
         dailyRecycler.apply {
             adapter = dailyAdapter
         }

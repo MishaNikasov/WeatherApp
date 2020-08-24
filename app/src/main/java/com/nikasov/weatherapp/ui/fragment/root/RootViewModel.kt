@@ -15,6 +15,7 @@ import com.nikasov.weatherapp.utils.ResourceProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class RootViewModel @ViewModelInject constructor(
     private val weatherRepository: WeatherRepository,
@@ -65,7 +66,9 @@ class RootViewModel @ViewModelInject constructor(
 
     private fun setWeather(weatherResult: WeatherResult) {
         latitude = weatherResult.coord.lat.toString()
-        longitude = weatherResult.coord.lat.toString()
+        longitude = weatherResult.coord.lon.toString()
         weather.postValue(ModelConverter.remoteWeatherToWeatherModel(weatherResult, resourceProvider))
+        Timber.d("${weatherResult.coord.lat}, ${weatherResult.coord.lon}")
+
     }
 }

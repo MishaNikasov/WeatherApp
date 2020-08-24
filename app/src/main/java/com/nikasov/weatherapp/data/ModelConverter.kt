@@ -50,21 +50,21 @@ object ModelConverter {
 
     fun remoteDailyToForecastModel(
         daily: Daily,
-        lat: String,
-        lon: String,
         resourceProvider: ResourceProvider
     ): ForecastModel {
-        val forecastModel = ForecastModel(
-            lat,
-            lon,
-            daily.dt
-        )
+        val forecastModel = ForecastModel()
+
         forecastModel.weather = daily.weather[0].main
         forecastModel.day = getDate(daily.dt*1000, resourceProvider.getString(R.string.daily_format))
         forecastModel.date = getDate(daily.dt*1000, resourceProvider.getString(R.string.date_format))
         forecastModel.tempMax = "${daily.temp.max.toInt()}°"
         forecastModel.tempMin = "${daily.temp.min.toInt()}°"
         forecastModel.icon = getIcon(daily.weather[0].icon, resourceProvider)
+
+        forecastModel.windSpeed = "${daily.wind_speed.toInt()} ${resourceProvider.getString(R.string.wind_speed)}"
+        forecastModel.feelLikeTemp = "${daily.feels_like.day.toInt()} ${resourceProvider.getString(R.string.c)}"
+        forecastModel.pressure = "${daily.pressure} ${resourceProvider.getString(R.string.pressure)}"
+        forecastModel.humidity = "${daily.humidity} %"
 
         return forecastModel
     }

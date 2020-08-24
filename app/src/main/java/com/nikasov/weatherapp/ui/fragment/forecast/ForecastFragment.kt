@@ -58,6 +58,7 @@ class ForecastFragment: Fragment() {
         val interaction = object : ForecastAdapter.Interaction {
             override fun onItemSelected(position: Int, item: ForecastModel) {
                 Timber.d(item.date)
+                binding.weather = item
             }
         }
 
@@ -69,6 +70,7 @@ class ForecastFragment: Fragment() {
 
         viewModel.forecastList.observe(viewLifecycleOwner, Observer { list ->
             forecastAdapter.submitList(list)
+            binding.weather = list[0]
         })
     }
 }

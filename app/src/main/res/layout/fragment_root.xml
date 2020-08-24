@@ -229,7 +229,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <include
-                        android:id="@+id/include"
+                        android:id="@+id/windLine"
                         layout="@layout/line"
                         android:layout_width="0dp"
                         android:layout_height="1px"
@@ -248,7 +248,7 @@
                         android:textColor="@color/white_transparent"
                         android:textSize="@dimen/small_text"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/include" />
+                        app:layout_constraintTop_toBottomOf="@+id/windLine" />
 
                     <TextView
                         android:id="@+id/wind"
@@ -281,7 +281,7 @@
                         android:textColor="@color/white_transparent"
                         android:textSize="@dimen/small_text"
                         app:layout_constraintStart_toEndOf="@+id/middleLine"
-                        app:layout_constraintTop_toBottomOf="@+id/include" />
+                        app:layout_constraintTop_toBottomOf="@+id/windLine" />
 
                     <TextView
                         android:id="@+id/feelLikeTemp"
@@ -394,7 +394,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/include" />
+                        app:layout_constraintTop_toTopOf="@+id/windLine" />
 
                     <TextView
                         android:id="@+id/date"

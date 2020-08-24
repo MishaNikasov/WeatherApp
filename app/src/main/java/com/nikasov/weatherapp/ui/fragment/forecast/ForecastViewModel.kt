@@ -10,6 +10,7 @@ import com.nikasov.weatherapp.data.remote.repository.WeatherRepository
 import com.nikasov.weatherapp.utils.ResourceProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class ForecastViewModel @ViewModelInject constructor(
     private val weatherRepository: WeatherRepository,
@@ -22,11 +23,10 @@ class ForecastViewModel @ViewModelInject constructor(
         viewModelScope.launch (Dispatchers.IO) {
             val list = arrayListOf<ForecastModel>()
             val forecast = weatherRepository.getDailyForecast(lat, lon, 3)
+            Timber.d("$lat, $lon")
 
             forecast.daily.forEach {
-                val model = ModelConverter.remoteDailyToForecastModel(
-                    it, lat, lon, resourceProvider
-                )
+                val model = ModelConverter.remoteDailyToForecastModel(it, resourceProvider)
                 list.add(model)
             }
 
