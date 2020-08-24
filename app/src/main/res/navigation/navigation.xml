@@ -12,10 +12,12 @@
         android:label="RootFragment" >
         <action
             android:id="@+id/toListFragment"
-            app:destination="@id/listFragment" />
+            app:destination="@id/listFragment"
+            app:launchSingleTop="true" />
         <action
             android:id="@+id/fromRootToForecastFragment"
-            app:destination="@id/forecastFragment" />
+            app:destination="@id/forecastFragment"
+            app:launchSingleTop="true" />
     </fragment>
     <fragment
         android:id="@+id/addFragment"
@@ -27,10 +29,12 @@
         android:label="ListFragment">
         <action
             android:id="@+id/toAddFragment"
-            app:destination="@id/addFragment" />
+            app:destination="@id/addFragment"
+            app:launchSingleTop="true" />
         <action
             android:id="@+id/action_listFragment_to_forecastFragment"
-            app:destination="@id/forecastFragment" />
+            app:destination="@id/forecastFragment"
+            app:launchSingleTop="true" />
     </fragment>
     <fragment
         android:id="@+id/forecastFragment"
