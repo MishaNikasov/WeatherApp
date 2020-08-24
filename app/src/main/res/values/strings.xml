@@ -5,6 +5,7 @@
     <string name="celsius">°C</string>
     <string name="day_format">EEEE, d</string>
     <string name="date_format">dd.MM</string>
+    <string name="sun_format">HH:mm</string>
     <string name="daily_format">EE</string>
     <string name="c">°C</string>
     <string name="c_small">°c</string>
@@ -16,4 +17,6 @@
     <string name="humidity_txt">Влажность</string>
     <string name="info">Подробности</string>
     <string name="forecast_week">Прогноз на неделю</string>
+    <string name="sunriseTxt">Восход</string>
+    <string name="sunset">Заход солнца</string>
 </resources>

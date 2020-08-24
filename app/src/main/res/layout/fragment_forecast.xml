@@ -272,7 +272,6 @@
                     tools:ignore="ContentDescription" />
 
                 <include
-                    android:visibility="invisible"
                     android:id="@+id/humidityLine"
                     layout="@layout/line"
                     android:layout_width="0dp"
@@ -282,6 +281,104 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/humidity" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/f5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/f4">
+
+                <TextView
+                    android:id="@+id/sunriseTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:text="@string/sunriseTxt"
+                    android:textColor="@color/white_transparent"
+                    android:textSize="@dimen/small_text"
+                    app:layout_constraintStart_toEndOf="@+id/sunriseIco"
+                    app:layout_constraintTop_toTopOf="@+id/sunriseIco" />
+
+                <TextView
+                    android:id="@+id/sunrise"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="@{weather.sunrise}"
+                    android:textColor="@color/white"
+                    app:layout_constraintStart_toStartOf="@+id/sunriseTxt"
+                    app:layout_constraintTop_toBottomOf="@+id/sunriseTxt" />
+
+                <ImageView
+                    android:id="@+id/sunriseIco"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="12dp"
+                    android:src="@drawable/ic_sunrise"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/white"
+                    tools:ignore="ContentDescription" />
+
+                <include
+                    android:id="@+id/sunriseLine"
+                    layout="@layout/line"
+                    android:layout_width="0dp"
+                    android:layout_height="1px"
+                    android:layout_marginTop="12dp"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/sunrise" />
+
+                <include
+                    android:id="@+id/middleLine"
+                    layout="@layout/line"
+                    android:layout_width="1px"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/sunsetTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:text="@string/sunset"
+                    android:textColor="@color/white_transparent"
+                    android:textSize="@dimen/small_text"
+                    app:layout_constraintStart_toEndOf="@+id/sunsetIco"
+                    app:layout_constraintTop_toTopOf="@+id/sunsetIco" />
+
+                <TextView
+                    android:id="@+id/sunset"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="@{weather.sunset}"
+                    android:textColor="@color/white"
+                    app:layout_constraintStart_toStartOf="@+id/sunsetTxt"
+                    app:layout_constraintTop_toBottomOf="@+id/sunsetTxt" />
+
+                <ImageView
+                    android:id="@+id/sunsetIco"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="12dp"
+                    android:src="@drawable/ic_sunset"
+                    app:layout_constraintStart_toEndOf="@+id/middleLine"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/white"
+                    tools:ignore="ContentDescription" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

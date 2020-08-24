@@ -66,6 +66,9 @@ object ModelConverter {
         forecastModel.pressure = "${daily.pressure} ${resourceProvider.getString(R.string.pressure)}"
         forecastModel.humidity = "${daily.humidity} %"
 
+        forecastModel.sunset = getDate(daily.sunset.toLong() * 1000, resourceProvider.getString(R.string.sun_format))
+        forecastModel.sunrise = getDate(daily.sunrise.toLong() * 1000, resourceProvider.getString(R.string.sun_format))
+
         return forecastModel
     }
 

@@ -15,5 +15,8 @@ data class ForecastModel (
     var windSpeed: String = "",
     var feelLikeTemp: String = "",
     var pressure: String = "",
-    var humidity: String = ""
+    var humidity: String = "",
+
+    var sunset: String = "",
+    var sunrise: String = ""
 )
